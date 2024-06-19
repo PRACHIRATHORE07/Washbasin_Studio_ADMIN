@@ -10,7 +10,7 @@ export const columns: ColumnDef<OrderColumnType>[] = [
     cell: ({ row }) => {
       return (
         <Link
-          href={`/orders/${row.original._id}`}
+          href={`/orders/{row.original._id}`}
           className="hover:text-red-1"
         >
           {row.original._id}
@@ -28,7 +28,7 @@ export const columns: ColumnDef<OrderColumnType>[] = [
   },
   {
     accessorKey: "totalAmount",
-    header: "Total ($)",
+    header: "Total (₹)",
   },
   {
     accessorKey: "createdAt",

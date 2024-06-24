@@ -20,7 +20,7 @@ const LeftSideBar = () => {
             href={link.url}
             key={link.label}
             className={`flex gap-4 text-body-medium ${
-              pathname === link.url ? "text-black" : "text-grey-1"
+              pathname === link.url ? "text-white" : "text-white"
             }`}
           >
             {link.icon} <p>{link.label}</p>
@@ -28,7 +28,7 @@ const LeftSideBar = () => {
         ))}
       </div>
 
-      <div className="flex gap-4 text-body-medium items-center">
+      <div className="flex gap-4 text-body-medium items-center text-white">
         <UserButton />
         <p>Edit Profile</p>
       </div>

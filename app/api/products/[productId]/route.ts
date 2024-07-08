@@ -70,6 +70,7 @@ export const POST = async (
       colors,
       price,
       expense,
+      isFeatured, // Add isFeatured field
     } = await req.json();
 
     if (!title || !description || !media || !category || !price || !expense) {
@@ -77,6 +78,11 @@ export const POST = async (
         status: 400,
       });
     }
+
+    // Validate tags, sizes, colors are arrays and not empty
+    const validatedTags = Array.isArray(tags) ? tags.filter(tag => typeof tag === 'string' && tag.trim() !== '') : [];
+    const validatedSizes = Array.isArray(sizes) ? sizes.filter(size => typeof size === 'string' && size.trim() !== '') : [];
+    const validatedColors = Array.isArray(colors) ? colors.filter(color => typeof color === 'string' && color.trim() !== '') : [];
 
     const addedCollections = collections.filter(
       (collectionId: string) => !product.collections.includes(collectionId)
@@ -114,11 +120,12 @@ export const POST = async (
         media,
         category,
         collections,
-        tags,
-        sizes,
-        colors,
+        tags: validatedTags,
+        sizes: validatedSizes,
+        colors: validatedColors,
         price,
         expense,
+        isFeatured, // Include isFeatured in update
       },
       { new: true }
     ).populate({ path: "collections", model: Collection });

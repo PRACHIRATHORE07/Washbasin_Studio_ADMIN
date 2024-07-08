@@ -26,6 +26,7 @@ export const POST = async (req: NextRequest) => {
       colors,
       price,
       expense,
+      isFeatured, // Include isFeatured in update
     } = await req.json();
 
     if (!title || !description || !media || !category || !price || !expense) {
@@ -34,17 +35,29 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
+    const sanitizedTags: string[] = Array.isArray(tags)
+    ? tags.filter((tag: any) => typeof tag === 'string')
+    : [];
+  const sanitizedSizes: string[] = Array.isArray(sizes)
+    ? sizes.filter((size: any) => typeof size === 'string')
+    : [];
+  const sanitizedColors: string[] = Array.isArray(colors)
+    ? colors.filter((color: any) => typeof color === 'string')
+    : [];
+
+
     const newProduct = await Product.create({
       title,
       description,
       media,
       category,
       collections,
-      tags,
-      sizes,
-      colors,
+      tags: sanitizedTags,
+      sizes: sanitizedSizes,
+      colors: sanitizedColors,
       price,
       expense,
+      isFeatured, // Include isFeatured in update
     });
 
     await newProduct.save();

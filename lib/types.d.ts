@@ -7,6 +7,7 @@ type CollectionType = {
 }
 
 type ProductType = {
+  isFeatured: boolean;
   _id: string;
   title: string;
   description: string;

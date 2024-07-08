@@ -13,6 +13,7 @@ const ProductSchema = new mongoose.Schema({
   expense: { type: mongoose.Schema.Types.Decimal128, get: (v: mongoose.Schema.Types.Decimal128) => { return parseFloat(v.toString()) }},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  isFeatured: { type: Boolean, default: false }, // Add isFeatured field
 }, { toJSON: { getters: true } });
 
 const Product = mongoose.models.Product || mongoose.model("Product", ProductSchema);
